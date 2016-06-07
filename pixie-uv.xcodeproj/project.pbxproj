@@ -1,0 +1,478 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D40B57111D04D67F00D540BD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = D40B57101D04D67F00D540BD /* main.c */; };
+		D43D697A1D04DAAE002EAC76 /* libuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D43D69791D04DAAE002EAC76 /* libuv.a */; };
+		D462CE221D0616F700139B28 /* logger.c in Sources */ = {isa = PBXBuildFile; fileRef = D462CE201D0616F700139B28 /* logger.c */; };
+		D462CE231D0617E300139B28 /* logger.c in Sources */ = {isa = PBXBuildFile; fileRef = D462CE201D0616F700139B28 /* logger.c */; };
+		D4798D761D06432E00F0DD7B /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = D4798D741D06432E00F0DD7B /* server.c */; };
+		D4798D791D06444C00F0DD7B /* blk_connection.c in Sources */ = {isa = PBXBuildFile; fileRef = D4798D771D06444C00F0DD7B /* blk_connection.c */; };
+		D4798D7C1D06449F00F0DD7B /* connection_table.c in Sources */ = {isa = PBXBuildFile; fileRef = D4798D7A1D06449F00F0DD7B /* connection_table.c */; };
+		D489483B1D04F626009D82C8 /* blk_message.c in Sources */ = {isa = PBXBuildFile; fileRef = D48948391D04F626009D82C8 /* blk_message.c */; };
+		D489483E1D04F7F6009D82C8 /* simple_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = D489483D1D04F7F6009D82C8 /* simple_buffer.c */; };
+		D48948461D0515D2009D82C8 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = D48948451D0515D2009D82C8 /* main.c */; };
+		D489484A1D0516DF009D82C8 /* blk_message.c in Sources */ = {isa = PBXBuildFile; fileRef = D48948391D04F626009D82C8 /* blk_message.c */; };
+		D489484B1D0516DF009D82C8 /* simple_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = D489483D1D04F7F6009D82C8 /* simple_buffer.c */; };
+		D489484E1D052D1D009D82C8 /* blk_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = D489484C1D052D1D009D82C8 /* blk_parser.c */; };
+		D489484F1D05308A009D82C8 /* blk_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = D489484C1D052D1D009D82C8 /* blk_parser.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D40B570B1D04D67F00D540BD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		D48948411D0515D2009D82C8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D40B570D1D04D67F00D540BD /* pixie-uv */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "pixie-uv"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D40B57101D04D67F00D540BD /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		D43D69791D04DAAE002EAC76 /* libuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libuv.a; path = ../../../../../../usr/local/Cellar/libuv/1.7.5/lib/libuv.a; sourceTree = "<group>"; };
+		D462CE201D0616F700139B28 /* logger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = logger.c; sourceTree = "<group>"; };
+		D462CE211D0616F700139B28 /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
+		D4798D741D06432E00F0DD7B /* server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = server.c; sourceTree = "<group>"; };
+		D4798D751D06432E00F0DD7B /* server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = server.h; sourceTree = "<group>"; };
+		D4798D771D06444C00F0DD7B /* blk_connection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = blk_connection.c; sourceTree = "<group>"; };
+		D4798D781D06444C00F0DD7B /* blk_connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blk_connection.h; sourceTree = "<group>"; };
+		D4798D7A1D06449F00F0DD7B /* connection_table.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = connection_table.c; sourceTree = "<group>"; };
+		D4798D7B1D06449F00F0DD7B /* connection_table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = connection_table.h; sourceTree = "<group>"; };
+		D4798D7E1D066BA200F0DD7B /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		D48948391D04F626009D82C8 /* blk_message.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = blk_message.c; sourceTree = "<group>"; };
+		D489483A1D04F626009D82C8 /* blk_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blk_parser.h; sourceTree = "<group>"; };
+		D489483C1D04F7F6009D82C8 /* simple_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simple_buffer.h; sourceTree = "<group>"; };
+		D489483D1D04F7F6009D82C8 /* simple_buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = simple_buffer.c; sourceTree = "<group>"; };
+		D48948431D0515D2009D82C8 /* test_bm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test_bm; sourceTree = BUILT_PRODUCTS_DIR; };
+		D48948451D0515D2009D82C8 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		D489484C1D052D1D009D82C8 /* blk_parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = blk_parser.c; sourceTree = "<group>"; };
+		D489484D1D052D1D009D82C8 /* blk_message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blk_message.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D40B570A1D04D67F00D540BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D43D697A1D04DAAE002EAC76 /* libuv.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D48948401D0515D2009D82C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D40B57041D04D67F00D540BD = {
+			isa = PBXGroup;
+			children = (
+				D462CE0A1D060B8A00139B28 /* deps */,
+				D43D69791D04DAAE002EAC76 /* libuv.a */,
+				D40B570F1D04D67F00D540BD /* pixie-uv */,
+				D48948441D0515D2009D82C8 /* test_bm */,
+				D40B570E1D04D67F00D540BD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D40B570E1D04D67F00D540BD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D40B570D1D04D67F00D540BD /* pixie-uv */,
+				D48948431D0515D2009D82C8 /* test_bm */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D40B570F1D04D67F00D540BD /* pixie-uv */ = {
+			isa = PBXGroup;
+			children = (
+				D40B57101D04D67F00D540BD /* main.c */,
+				D4798D7B1D06449F00F0DD7B /* connection_table.h */,
+				D4798D7A1D06449F00F0DD7B /* connection_table.c */,
+				D4798D781D06444C00F0DD7B /* blk_connection.h */,
+				D4798D771D06444C00F0DD7B /* blk_connection.c */,
+				D4798D751D06432E00F0DD7B /* server.h */,
+				D4798D741D06432E00F0DD7B /* server.c */,
+				D489483A1D04F626009D82C8 /* blk_parser.h */,
+				D489484C1D052D1D009D82C8 /* blk_parser.c */,
+				D489484D1D052D1D009D82C8 /* blk_message.h */,
+				D48948391D04F626009D82C8 /* blk_message.c */,
+				D489483C1D04F7F6009D82C8 /* simple_buffer.h */,
+				D489483D1D04F7F6009D82C8 /* simple_buffer.c */,
+				D4798D7E1D066BA200F0DD7B /* common.h */,
+			);
+			path = "pixie-uv";
+			sourceTree = "<group>";
+		};
+		D462CE0A1D060B8A00139B28 /* deps */ = {
+			isa = PBXGroup;
+			children = (
+				D462CE1F1D0616F700139B28 /* logger */,
+			);
+			name = deps;
+			path = "pixie-uv/deps";
+			sourceTree = "<group>";
+		};
+		D462CE1F1D0616F700139B28 /* logger */ = {
+			isa = PBXGroup;
+			children = (
+				D462CE211D0616F700139B28 /* logger.h */,
+				D462CE201D0616F700139B28 /* logger.c */,
+			);
+			path = logger;
+			sourceTree = "<group>";
+		};
+		D48948441D0515D2009D82C8 /* test_bm */ = {
+			isa = PBXGroup;
+			children = (
+				D48948451D0515D2009D82C8 /* main.c */,
+			);
+			path = test_bm;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		D462CE241D062BCF00139B28 /* make_target */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = D462CE251D062BCF00139B28 /* Build configuration list for PBXLegacyTarget "make_target" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "/Users/rob/MyProjects/Pixie/pixie-uv/pixie-uv/pixie-uv";
+			dependencies = (
+			);
+			name = make_target;
+			passBuildSettingsInEnvironment = 1;
+			productName = make_target;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXNativeTarget section */
+		D40B570C1D04D67F00D540BD /* pixie-uv */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D40B57141D04D67F00D540BD /* Build configuration list for PBXNativeTarget "pixie-uv" */;
+			buildPhases = (
+				D40B57091D04D67F00D540BD /* Sources */,
+				D40B570A1D04D67F00D540BD /* Frameworks */,
+				D40B570B1D04D67F00D540BD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "pixie-uv";
+			productName = "pixie-uv";
+			productReference = D40B570D1D04D67F00D540BD /* pixie-uv */;
+			productType = "com.apple.product-type.tool";
+		};
+		D48948421D0515D2009D82C8 /* test_bm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D48948471D0515D2009D82C8 /* Build configuration list for PBXNativeTarget "test_bm" */;
+			buildPhases = (
+				D489483F1D0515D2009D82C8 /* Sources */,
+				D48948401D0515D2009D82C8 /* Frameworks */,
+				D48948411D0515D2009D82C8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = test_bm;
+			productName = test_bm;
+			productReference = D48948431D0515D2009D82C8 /* test_bm */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D40B57051D04D67F00D540BD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Blackwellapps;
+				TargetAttributes = {
+					D40B570C1D04D67F00D540BD = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					D462CE241D062BCF00139B28 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					D48948421D0515D2009D82C8 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = D40B57081D04D67F00D540BD /* Build configuration list for PBXProject "pixie-uv" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D40B57041D04D67F00D540BD;
+			productRefGroup = D40B570E1D04D67F00D540BD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D40B570C1D04D67F00D540BD /* pixie-uv */,
+				D48948421D0515D2009D82C8 /* test_bm */,
+				D462CE241D062BCF00139B28 /* make_target */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D40B57091D04D67F00D540BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D489483B1D04F626009D82C8 /* blk_message.c in Sources */,
+				D40B57111D04D67F00D540BD /* main.c in Sources */,
+				D4798D7C1D06449F00F0DD7B /* connection_table.c in Sources */,
+				D489484E1D052D1D009D82C8 /* blk_parser.c in Sources */,
+				D4798D791D06444C00F0DD7B /* blk_connection.c in Sources */,
+				D462CE221D0616F700139B28 /* logger.c in Sources */,
+				D4798D761D06432E00F0DD7B /* server.c in Sources */,
+				D489483E1D04F7F6009D82C8 /* simple_buffer.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D489483F1D0515D2009D82C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D462CE231D0617E300139B28 /* logger.c in Sources */,
+				D489484F1D05308A009D82C8 /* blk_parser.c in Sources */,
+				D489484A1D0516DF009D82C8 /* blk_message.c in Sources */,
+				D489484B1D0516DF009D82C8 /* simple_buffer.c in Sources */,
+				D48948461D0515D2009D82C8 /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D40B57121D04D67F00D540BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D40B57131D04D67F00D540BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D40B57151D04D67F00D540BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(SRCROOT)/pixie-uv/deps",
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/libuv/1.7.5/lib,
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = /usr/local/lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D40B57161D04D67F00D540BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/pixie-uv/deps;/usr/local/include";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/libuv/1.7.5/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D462CE261D062BCF00139B28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D462CE271D062BCF00139B28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D48948481D0515D2009D82C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/pixie-uv/deps";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "";
+			};
+			name = Debug;
+		};
+		D48948491D0515D2009D82C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D40B57081D04D67F00D540BD /* Build configuration list for PBXProject "pixie-uv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D40B57121D04D67F00D540BD /* Debug */,
+				D40B57131D04D67F00D540BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D40B57141D04D67F00D540BD /* Build configuration list for PBXNativeTarget "pixie-uv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D40B57151D04D67F00D540BD /* Debug */,
+				D40B57161D04D67F00D540BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D462CE251D062BCF00139B28 /* Build configuration list for PBXLegacyTarget "make_target" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D462CE261D062BCF00139B28 /* Debug */,
+				D462CE271D062BCF00139B28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D48948471D0515D2009D82C8 /* Build configuration list for PBXNativeTarget "test_bm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D48948481D0515D2009D82C8 /* Debug */,
+				D48948491D0515D2009D82C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D40B57051D04D67F00D540BD /* Project object */;
+}
