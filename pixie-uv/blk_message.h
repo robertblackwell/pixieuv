@@ -11,7 +11,7 @@ struct blk_message_s{
     simple_buffer_t*    msg_buf;
     simple_buffer_t*    header;
     int                 length; // value of length bytes in message
-    simple_buffer_t*    body;
+//    simple_buffer_t*    body;
     int                 body_offset; // start of body in message buffer
 };
 

@@ -10,6 +10,7 @@
 #define PARSER_STATE_INITIAL  11
 #define PARSER_STATE_LENGTH   22
 #define PARSER_STATE_BODY     33
+#define PARSER_STATE_BODY_BLOCK 44
 
 
 void bmp_init(blk_parser_t* p, blk_parser_cb cb)
@@ -21,6 +22,21 @@ void bmp_init(blk_parser_t* p, blk_parser_cb cb)
 }
 
 void bpm_reset(blk_parser_t* p){
+}
+
+void bpm_free(blk_parser_t* parser)
+{
+    if( parser->msg_ptr != NULL ){
+        bm_free(parser->msg_ptr);
+    }
+    free(parser);
+}
+
+void bmp_deinit(blk_parser_t parser)
+{
+    if( parser.msg_ptr != NULL ){
+        bm_free(parser.msg_ptr);
+    }
 }
 
 /**
@@ -37,7 +53,7 @@ void bmp_append(blk_parser_t* p, char* bytes, int count)
     bool done = false;
     char* start_str = "START";
     long start_length = strlen(start_str);
-    
+        
     int     i = 0;
 
     for(; i < count ;)
@@ -50,15 +66,15 @@ void bmp_append(blk_parser_t* p, char* bytes, int count)
                         p->state = PARSER_STATE_INITIAL;
                         error = false;
                         // append byte t message
-                        sb_append(p->msg_ptr->header, &bytes[i], 1);
-                        sb_append(p->msg_ptr->msg_buf, &bytes[i], 1);
+                       sb_append(p->msg_ptr->header, &bytes[i], 1);
+                       sb_append(p->msg_ptr->msg_buf, &bytes[i], 1);
                         i++; p->position_in_message++;
                         
                     }else if( (p->position_in_message == start_length) && (bytes[i] == '\n') ){
                         p->state = PARSER_STATE_LENGTH;
                         error = false;
                         // append byte to message and save the position of the \n
-                        sb_append(p->msg_ptr->msg_buf, &bytes[i], 1);
+                       sb_append(p->msg_ptr->msg_buf, &bytes[i], 1);
                         i++; p->position_in_message++;
                     }else{
                         error = true;
@@ -80,7 +96,7 @@ void bmp_append(blk_parser_t* p, char* bytes, int count)
                         i++; p->position_in_message++;
                         
                     } else if( bytes[i] == '\n' ){
-                        p->state = PARSER_STATE_BODY;
+                        p->state = PARSER_STATE_BODY_BLOCK;
                         sb_append(p->msg_ptr->msg_buf, &bytes[i], 1);
                         p->msg_ptr->body_offset = (int)(p->position_in_message + 1L);
                         i++; p->position_in_message++;
@@ -93,14 +109,32 @@ void bmp_append(blk_parser_t* p, char* bytes, int count)
                         break;
                     if( i == count )
                         break;
-                }
-                
+                }  
                 break;
+            case PARSER_STATE_BODY_BLOCK  :
+                {
+                    int body_length = p->msg_ptr->length;
+                    p->msg_ptr->body_offset = i;
+                    if( count - i >= body_length ){
+                        sb_append(p->msg_ptr->msg_buf, &bytes[i], body_length);
+//                        sb_append(p->msg_ptr->body, &bytes[i], body_length);
+                        i += body_length;
+                        done = true;
+                    } else {
+                        sb_append(p->msg_ptr->msg_buf, &bytes[i], count - i);
+//                        sb_append(p->msg_ptr->body, &bytes[i], count - i);
+                        i = count;
+                        done = false;
+                    }
+                    
+                }
+                break;
+#ifdef HHHH
             case PARSER_STATE_BODY  :
                 for(;;){
                     if( sb_get_used(p->msg_ptr->body) < p->msg_ptr->length  ){
                         sb_append(p->msg_ptr->msg_buf, &bytes[i], 1);
-                        sb_append(p->msg_ptr->body, &bytes[i], 1);
+//                        sb_append(p->msg_ptr->body, &bytes[i], 1);
                         
                         if(  sb_get_used(p->msg_ptr->body) == p->msg_ptr->length ){
                             done = true;
@@ -116,21 +150,22 @@ void bmp_append(blk_parser_t* p, char* bytes, int count)
                         break;
                 }
                 break;
+#endif
         }
         if( error ){
-        
             p->cb(p, NULL, -1);
-            bm_free(p->msg_ptr);
+            bm_free(p->msg_ptr); p->msg_ptr = NULL;
             i++; p->position_in_message++;
             bmp_init(p, p->cb);
         
         }else if( done ){
-            
             p->cb(p, p->msg_ptr, 0);
+            p->msg_ptr = NULL;
             done = false;
             bmp_init(p, p->cb);
-        
+        }else{
+            
         }
-        
     }
+	
 }

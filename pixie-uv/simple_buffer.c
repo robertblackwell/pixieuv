@@ -32,6 +32,7 @@ bool xstrncmp(char* one, char* two, int n){
 
 void sb_test_guards(simple_buffer_t* sb, char* msg)
 {
+    return;
     char* opn = "OPN";
     char* cls = "CLS";
     if( xstrncmp(sb->open_guard, opn, 3) && xstrncmp(sb->close_guard, cls, 3) )
@@ -66,8 +67,8 @@ void sb_free(simple_buffer_t* sb)
 }
 void sb_append(simple_buffer_t* sb, char* at, size_t length )
 {    
-    sb_test_guards(sb, "Append begin");
-    sb_dump(sb, "Append ");
+    //sb_test_guards(sb, "Append begin");
+    //sb_dump(sb, "Append ");
     
     if(sb->used + length > sb->length){
         // extend buffer
@@ -84,7 +85,11 @@ void sb_append(simple_buffer_t* sb, char* at, size_t length )
         free(tmp);
         sb->buffer = b;
     }
-    memcpy(&sb->buffer[sb->used], at, length );
+    if( length == 1 ){
+        sb->buffer[sb->used] = at[0];
+    }else{
+        memcpy(&sb->buffer[sb->used], at, length );
+    }
     sb->used += length;
     sb_test_guards(sb, "Append end");
     sb_dump(sb, "After append");

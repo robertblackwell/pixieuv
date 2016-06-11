@@ -13,12 +13,13 @@
 
 blk_message_t* bm_create()
 {
+    int sz = sizeof(blk_message_t);
     char* tmp = malloc(sizeof(blk_message_t));
     blk_message_t* p = (blk_message_t*) tmp;
     p->msg_buf = sb_create();
     p->length = 0;
     p->header = sb_create();
-    p->body = sb_create();
+//    p->body = sb_create();
     p->body_offset = 0;
     
     return p;
@@ -28,5 +29,6 @@ void bm_free(blk_message_t* m)
 {
     sb_free(m->msg_buf);
     sb_free(m->header);
-    sb_free(m->body);
+//    sb_free(m->body);
+    free(m);
 }

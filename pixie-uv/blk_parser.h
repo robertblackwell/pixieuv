@@ -23,4 +23,8 @@ void bmp_init(blk_parser_t * p, blk_parser_cb cb);
 
 void bmp_append(blk_parser_t* p, char* bytes, int count);
 
+void bmp_free(blk_parser_t* p);
+
+void bmp_deinit(blk_parser_t p);
+
 #endif /* parser_h */

@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-#define kSIMPLE_BUFFER_SIZE 1000
+#define kSIMPLE_BUFFER_SIZE 100000
 
 typedef struct simple_buffer_s{
     char  open_guard[5];

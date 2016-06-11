@@ -17,10 +17,13 @@ SLOG_SETLEVEL(SLOG_LEVEL_DEBUG)
 #define DEFAULT_PORT 8001
 #define DEFAULT_BACKLOG 10
 
+
+#ifdef NOTUSED
 uv_loop_t* loop;
 
 void cb_alloc_buffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 {
+    
     uv_buf_t tmp = uv_buf_init((char*) malloc(suggested_size), (int)suggested_size);
     void* p = (void*) tmp.base;
     *buf = tmp;
@@ -116,9 +119,8 @@ void on_new_connection(uv_stream_t *server, int status) {
         uv_close((uv_handle_t*) client, NULL);
     }
 }
+#endif
 
-#define GOON
-#ifdef GOON
 
 void echo_handler_function(blk_message_t* msg, blk_connection_t* conn){
     SLOGD(" got here");
@@ -135,50 +137,3 @@ int main() {
     return uv_run(loop, UV_RUN_DEFAULT);
 }
 
-#else
-void start_server(uv_loop_t* loop)
-{
-    struct sockaddr_in addr;
-    SLOGI("We are up and running \n");
-    uv_tcp_t* server_tcp = malloc(sizeof(uv_tcp_t));
-    uv_tcp_init(loop, server_tcp);
-
-    uv_ip4_addr("0.0.0.0", DEFAULT_PORT, &addr);
-
-    uv_tcp_bind(server_tcp, (const struct sockaddr*)&addr, 0);
-    int r = uv_listen((uv_stream_t*) server_tcp, DEFAULT_BACKLOG, on_new_connection);
-    if (r) {
-        fprintf(stderr, "Listen error %s\n", uv_strerror(r));
-        return ;
-    }
-}
-int main() {
-    
-    loop = uv_default_loop();
-    start_server(loop);
-    return uv_run(loop, UV_RUN_DEFAULT);
-    
-}
-
-#ifdef GGGGG
-int main() {
-    
-    loop = uv_default_loop();
-    struct sockaddr_in addr;
-    SLOGI("We are up and running \n");
-    uv_tcp_t server_tcp;
-    uv_tcp_init(loop, &server_tcp);
-    
-    uv_ip4_addr("0.0.0.0", DEFAULT_PORT, &addr);
-    
-    uv_tcp_bind(&server_tcp, (const struct sockaddr*)&addr, 0);
-    int r = uv_listen((uv_stream_t*) &server_tcp, DEFAULT_BACKLOG, on_new_connection);
-    if (r) {
-        fprintf(stderr, "Listen error %s\n", uv_strerror(r));
-        return 1;
-    }
-    return uv_run(loop, UV_RUN_DEFAULT);
-
-}
-#endif
-#endif

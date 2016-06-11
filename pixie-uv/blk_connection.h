@@ -24,10 +24,12 @@ typedef void(blk_connection_on_write_msg_cb)(blk_connection_t* conn, blk_message
 //
 // call back provided by server to be notified when conn is complete
 //
-typedef void(blk_connection_completion_cb)(server_t *server, blk_connection_t* conn);
+typedef void(blk_connection_completion_cb)(server_t *server, blk_connection_t* conn, int status);
 
 struct blk_connection_s{
+    int                     connection_id;      //
     server_t*               server;             // the server object that started the connection
+    
     uv_tcp_t*               stream;             // the active tcp connection
                                                 // not owned by the connection do not dealloc
     
@@ -35,13 +37,20 @@ struct blk_connection_s{
                                                 // not owned by the connection do not dealloc
     
     blk_parser_t            parser;             // parse the input stream into blk_messages
-    uv_buf_t                buf;                // write buf temporary variable
+    uv_write_t              write_req;          // for writing the output messsage
     
     //
-    // These ARE owned by the connection and should be cleaned up
+    //  These next two ARE owned by the connection and should be cleaned up. BUT THEY
+    //  ARE - connected. During and just after a write operation
+    //
+    //  (void*)current_message->msg_byf->buffer == buf.base
+    //
+    //   so becareful how this is cleaned up.
+    //
+    //  suggest using blk_connection_cleanup_write_buffer(conn)
     //
     blk_message_t*          current_message;    // current message being 'handled'
-    uv_write_t*             write_req;          // for writing the output messsage
+    uv_buf_t                buf;                // write buf temporary variable
 
     //
     // call back functions
@@ -60,7 +69,14 @@ blk_connection_t* blk_connection_create(
                                         blk_connection_completion_cb cb
                                         );
 
-void blk_connection_read(blk_connection_t *conn, void(on_blk_message)(blk_message_t msg, int status));
+void blk_connection_set_id(blk_connection_t* conn, int id);
+
+//
+// Called to start reading data and operating the connection
+//
+void blk_connection_start(blk_connection_t* conn);
+
+void blk_connection_read(blk_connection_t *conn);
 
 void blk_connection_write(
                           blk_connection_t* conn,
@@ -68,9 +84,5 @@ void blk_connection_write(
                           blk_connection_on_write_msg_cb* on_write_msg_cb
                           );
 
-//
-// Called to start reading data and operating the connection
-//
-void blk_connection_start(blk_connection_t* conn);
-
+void blk_connection_free(blk_connection_t* conn);
 #endif /* blk_connection_h */

@@ -12,52 +12,70 @@ SLOG_SETLEVEL(SLOG_LEVEL_DEBUG)
 
 #define DEFAULT_PORT 8001
 
-void on_connection_complete_cb(server_t* server, blk_connection_t* conn, int status)
+//
+// Forward declares
+//
+static void on_connection_complete_cb(server_t* server, blk_connection_t* conn, int status);
+void on_uv_client_close(uv_handle_t* client);
+
+//
+//  callback for new connection.
+//  create a new connection object and initialize
+//  setup completion call back
+//  set up the handler function to process the input message and create the output message
+//  add it to the connection table
+//  start the connection
+//
+static void on_connection_new( uv_stream_t *server_stream, int status )
 {
-    SLOGD("status %d \n");
+    
+    if (status < 0)
+    {
+        SLOGE(  "connection error %s\n", uv_strerror(status));
+    }
+    else
+    {
+        uv_loop_t*  loop = server_stream->loop;
+        server_t* server = (server_t*)(server_stream->data);
+        blk_handler_function* hf = server->handler_function;
+        
+        uv_tcp_t *client = (uv_tcp_t*) malloc(sizeof(uv_tcp_t));
+        uv_tcp_init(loop, client);
+        
+        if (uv_accept(server_stream, (uv_stream_t*) client) == 0)
+        {
+            blk_connection_t* new_conn = blk_connection_create(client, loop, server, hf, on_connection_complete_cb);
+            int id = connection_table_add(server->connection_table, (void*)new_conn);
+            SLOGD("accept OK id : %d client: %lx \n", id, (long)client);
+            blk_connection_set_id(new_conn, id);
+            blk_connection_start(new_conn);
+        }
+        else
+        {
+            SLOGE( "accept failed  \n");
+            uv_close((uv_handle_t*) client, NULL);
+        }
+    }
+}
+//
+//  completion callback
+//  remove connection from connection table
+//  free the connection object
+//
+static void on_connection_complete_cb(server_t* server, blk_connection_t* conn, int status)
+{
+    SLOGD("status %d id: %d stream : %lx \n", status, conn->connection_id, conn->stream);
+    connection_table_t* ct = server->connection_table;
+    connection_table_remove(ct, (void*) conn);
+    uv_tcp_t* client = conn->stream;
+    uv_close((uv_handle_t*)client, on_uv_client_close);
+    blk_connection_free(conn);
+}
+void on_uv_client_close(uv_handle_t* client){
+    SLOGV("%lx \n", (long)client);
+    free(client);
 }
 
-void server_on_connection(uv_stream_t *server_stream, int status) {
-    
-    if (status < 0) {
-        SLOGE(  "connection error %s\n", uv_strerror(status));
-        return;
-    }
-    SLOGD( " status : %d \n", status);
-    uv_loop_t*  loop = server_stream->loop;
-    server_t* st = (server_t*)server_stream->data;
-    blk_handler_function* hf = st->handler_function;
-    
-    uv_tcp_t *client = (uv_tcp_t*) malloc(sizeof(uv_tcp_t));
-    uv_tcp_init(loop, client);
-    
-    if (uv_accept(server_stream, (uv_stream_t*) client) == 0) {
-        //
-        // In here create the object that will server the client and initiate it
-        //
-        SLOGD("accept OK ");
-        server_t* st = (server_t*)server_stream->data;
-        blk_connection_t* new_conn = blk_connection_create(client, loop, hf);
-        connection_table_add(st->connection_table, (void*)new_conn);
-        blk_connection_start(new_conn, on_connection_complete_cb);
-//        new_conn->handle = client;
-//        new_conn->handler_function = ((server_t*)server_stream->data)->handler_function;
-//        new_conn->loop = loop;
-//        
-//        
-//        
-//        echo_context_t * ec = ec_create();
-//        ec->client = client;
-//        client->data = (void*) ec;
-//        
-//        //        ec_handle(ec, some_callback_to_handle_service_complete);
-//        uv_read_start((uv_stream_t*) client, cb_alloc_buffer, cb_read_in_echo);
-    }
-    else {
-        SLOGE( "accept failed  \n");
-        uv_close((uv_handle_t*) client, NULL);
-    }
-}
 
 
 server_t*   server_create(uv_loop_t* loop, blk_handler_function handler)
@@ -83,9 +101,9 @@ void server_listen(server_t* server, int port)
     uv_ip4_addr("0.0.0.0", DEFAULT_PORT, &addr);
     
     uv_tcp_bind(server_tcp, (const struct sockaddr*)&addr, 0);
-    int r = uv_listen((uv_stream_t*) server_tcp, 10, server_on_connection);
+    int r = uv_listen((uv_stream_t*) server_tcp, SOMAXCONN, on_connection_new);
     if (r) {
-        fprintf(stderr, "Listen error %s\n", uv_strerror(r));
+        SLOGE("Listen error %s\n", uv_strerror(r));
         return;
     }
     
